@@ -1,42 +1,62 @@
 package utils;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.sql.ResultSet;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 import net.Client;
 
-public class Handle {
+public class ClientHandle extends Client {
+
+	public ClientHandle() {
+		super();
+	}
+
+// 发送json数据
+	public void sendJson(JSONObject json) {
+		try {
+			dos.write(json.toString().getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+//	接收json数据
+	public JSONObject receiveJson() {
+		byte[] buf = new byte[1024 * 8];
+		try {
+			dis.read(buf);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return JSON.parseObject(new String(buf));
+	}
 
 //	登录验证
 	public int login(String name, String password) throws IOException {
-		Client client = new Client();
-		ObjectOutputStream oos = client.getOutputString();
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("name", name);
-		map.put("password", password);
-		oos.writeObject(map);
-		client.closeAll();
+//		Client client = new Client();
+//		JSONObject json = new JSONObject();
+//		json.put("name", name);
+//		json.put("password", password);
+//		client.sendJson(json);
+//		client.closeAll();
 		return 0;
 	}
 
 //	注册用户并验证用户名可用性
 	public int Register(String name, String password) throws IOException {
-		Client client = new Client();
-		ObjectOutputStream oos = client.getOutputString();
-		Map<String, String> map = new HashMap<String, String>();
-		
-		
-		client.closeAll();
+
 		return 0;
 	}
 
 //	修改用户名和密码
 	public int updateUserName(String uid, String newName, String newPassword) {
-		
+
 		return 0;
 	}
 
@@ -88,8 +108,9 @@ public class Handle {
 
 		return null;
 	}
-	public static void main(String[] args) throws IOException {
-		new Handle().login("yuki", "123456");
+
+	public static void main(String[] args){
+		
 	}
 
 }
