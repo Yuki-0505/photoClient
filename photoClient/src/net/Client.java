@@ -1,22 +1,26 @@
 package net;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 public class Client {
 
 	private Socket socket;
-	public DataInputStream dis;
-	public DataOutputStream dos;
+	private BufferedReader in;
+	private PrintStream out;
 
 	public Client() {
 		try {
 			this.socket = new Socket("localhost", 8000);
-			this.dis = new DataInputStream(socket.getInputStream());
-			this.dos = new DataOutputStream(socket.getOutputStream());
+			this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			this.out = new PrintStream(socket.getOutputStream());
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -26,12 +30,28 @@ public class Client {
 		}
 	}
 
+// 发送json数据
+	public void sendJson(JSONObject json) {
+		out.println(json.toString());
+	}
+
+//	接收json数据
+	public JSONObject receiveJson() {
+		try {
+			return JSON.parseObject(in.readLine());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 //	关闭所有接口
 	public void closeAll() {
 		try {
 			socket.close();
-			dis.close();
-			dos.close();
+			in.close();
+			out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
