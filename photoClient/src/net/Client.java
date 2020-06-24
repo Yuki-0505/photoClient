@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 public class Client {
@@ -30,21 +31,21 @@ public class Client {
 		}
 	}
 
-// 发送json数据
-	public void sendJson(JSONObject json) {
-		out.println(json.toString());
-	}
-
-//	接收json数据
-	public JSONObject receiveJson() {
-		try {
-			return JSON.parseObject(in.readLine());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	// 发送json数据
+		public void sendJson(JSONArray json) {
+			out.println(json.toString());
 		}
-		return null;
-	}
+
+//		接收json数据
+		public JSONArray receiveJson() {
+			try {
+				return JSONArray.parseArray(in.readLine());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
 
 //	关闭所有接口
 	public void closeAll() {
