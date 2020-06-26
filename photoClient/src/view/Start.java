@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import javax.swing.JLabel;
 
 public class Start extends JFrame {
 
@@ -85,24 +86,15 @@ public class Start extends JFrame {
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_2, null);
 		
-		JToolBar toolBar = new JToolBar();
-		contentPane.add(toolBar, BorderLayout.EAST);
+		JPanel panel_4 = new JPanel();
+		contentPane.add(panel_4, BorderLayout.WEST);
+		panel_4.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		
-		JPanel panel_3 = new JPanel();
-		toolBar.add(panel_3);
-		panel_3.setLayout(new GridLayout(0, 1, 0, 0));
+		JLabel lblNewLabel = new JLabel("New label");
+		panel_4.add(lblNewLabel);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		panel_3.add(btnNewButton_1);
-		
-		JButton btnNewButton = new JButton("New button");
-		panel_3.add(btnNewButton);
-		
-		JButton btnNewButton_2 = new JButton("New button");
-		panel_3.add(btnNewButton_2);
-		
-		JTree tree = new JTree();
-		contentPane.add(tree, BorderLayout.WEST);
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		panel_4.add(lblNewLabel_1);
 	}
 
 }
