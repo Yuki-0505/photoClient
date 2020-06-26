@@ -5,8 +5,7 @@ public class Register extends Tools {
 	public int work(String name, String password) {
 		json.put("name", name);
 		json.put("password", password);
-		jsonArr.add(json);
-		getJsonArr();
+		jsonArrIO();
 		return jsonArr.getJSONObject(0).getIntValue("status");
 	}
 

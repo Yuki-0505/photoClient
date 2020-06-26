@@ -13,8 +13,7 @@ public class Login extends Tools {
 	public JSONObject work(String name, String password) {
 		json.put("name", name);
 		json.put("password", password);
-		jsonArr.add(json);
-		getJsonArr();
+		jsonArrIO();
 		if(jsonArr.size() == 0) {
 			return null;
 		}

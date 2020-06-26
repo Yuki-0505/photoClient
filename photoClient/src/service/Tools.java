@@ -17,7 +17,8 @@ public class Tools {
 		jsonArr.add(clazz);
 	}
 	
-	public void getJsonArr() {
+	public void jsonArrIO() {
+		jsonArr.add(json);
 		Client client = new Client();
 		client.sendJson(jsonArr);
 		jsonArr = client.receiveJson();
