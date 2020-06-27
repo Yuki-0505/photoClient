@@ -1,6 +1,9 @@
 package service;
-
-public class UpdateSignature extends Tools {
+/*
+ * 修改用户个性签名
+ * 返回状态
+ */
+public class UpdateSignature extends PassData {
 
 	public UpdateSignature() {
 		super();

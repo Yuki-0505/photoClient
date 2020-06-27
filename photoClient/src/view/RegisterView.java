@@ -2,12 +2,16 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,12 +38,13 @@ public class RegisterView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegisterView() {
+	public RegisterView() throws IOException {
+		setIconImage(new ImageIcon("./images/user.png").getImage());
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
 		Toolkit kit = Toolkit.getDefaultToolkit(); // 定义工具包
 		Dimension screenSize = kit.getScreenSize(); // 获取屏幕的尺寸
-		setLocation(screenSize.width / 2 - 160, screenSize.height / 2 - 115);
+		setBounds(screenSize.width / 2 - 160, screenSize.height / 2 - 115, 450, 300);
 		setSize(320, 210);
 		setResizable(false);
 		setLayout(null);

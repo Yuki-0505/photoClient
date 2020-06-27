@@ -1,6 +1,9 @@
 package service;
-
-public class Register extends Tools {
+/*
+ * 注册用户
+ * 返回状态
+ */
+public class Register extends PassData {
 	
 	public int work(String name, String password) {
 		json.put("name", name);

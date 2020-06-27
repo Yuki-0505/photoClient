@@ -1,6 +1,9 @@
 package service;
-
-public class UpdateGroupName extends Tools {
+/*
+ * 修改分组名
+ * 返回状态
+ */
+public class UpdateGroupName extends PassData {
 
 	public UpdateGroupName() {
 		super();

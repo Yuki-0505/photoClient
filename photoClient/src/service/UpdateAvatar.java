@@ -3,8 +3,11 @@ package service;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-
-public class UpdateAvatar extends Tools {
+/*
+ * 修改用户头像
+ * 返回状态
+ */
+public class UpdateAvatar extends PassData {
 
 	public UpdateAvatar() {
 		super();

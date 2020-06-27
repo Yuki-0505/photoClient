@@ -3,8 +3,11 @@ package service;
 import java.sql.SQLException;
 
 import com.alibaba.fastjson.JSONObject;
-
-public class Login extends Tools {
+/*
+ * 登录验证
+ * 返回状态及用户信息
+ */
+public class Login extends PassData {
 	
 	public Login() {
 		super();

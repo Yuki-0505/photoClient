@@ -5,13 +5,13 @@ import com.alibaba.fastjson.JSONObject;
 
 import net.Client;
 
-public class Tools {
+public class PassData {
 	
 	public JSONArray jsonArr = new JSONArray();
 	public JSONObject clazz = new JSONObject();
 	public JSONObject json = new JSONObject();
 	
-	public Tools() {
+	public PassData() {
 		super();
 		clazz.put("clazz", this.getClass().getName());
 		jsonArr.add(clazz);

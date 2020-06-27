@@ -1,6 +1,9 @@
 package service;
-
-public class DeleteGroup extends Tools {
+/*
+ * 删除分组
+ * 返回状态
+ */
+public class DeleteGroup extends PassData {
 
 	public DeleteGroup() {
 		super();

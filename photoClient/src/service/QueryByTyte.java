@@ -7,8 +7,11 @@ import java.io.IOException;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-
-public class QueryByTyte extends Tools {
+/*
+ * 按类型编号查询图片
+ * 返回图片信息
+ */
+public class QueryByTyte extends PassData {
 
 	public QueryByTyte() {
 		super();

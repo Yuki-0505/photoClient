@@ -1,6 +1,9 @@
 package service;
-
-public class UpdateImageGroup extends Tools {
+/*
+ * 修改图片所属分组
+ * 返回状态
+ */
+public class UpdateImageGroup extends PassData {
 
 	public UpdateImageGroup() {
 		super();

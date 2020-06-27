@@ -1,6 +1,9 @@
 package service;
-
-public class updateUserName extends Tools {
+/*
+ * 修改用户名和密码
+ * 返回状态
+ */
+public class updateUserName extends PassData {
 	
 	public updateUserName() {
 		super();

@@ -1,6 +1,9 @@
 package service;
-
-public class CreateGroup extends Tools {
+/*
+ * 新建分组
+ * 返回状态
+ */
+public class CreateGroup extends PassData {
 	
 	public CreateGroup() {
 		super();

@@ -6,8 +6,11 @@ import java.io.IOException;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-
-public class QueryByTime extends Tools {
+/*
+ * 按时间戳查询图片
+ * 返回图片信息
+ */
+public class QueryByTime extends PassData {
 	
 	public QueryByTime() {
 		super();

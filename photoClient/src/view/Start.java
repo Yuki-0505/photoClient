@@ -1,26 +1,28 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JToolBar;
-import javax.swing.JButton;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JTree;
-import javax.swing.JTabbedPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JList;
+import javax.swing.JSplitPane;
 
 public class Start extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -44,19 +46,26 @@ public class Start extends JFrame {
 	 */
 	public Start() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1024, 720);
+		Toolkit kit = Toolkit.getDefaultToolkit(); // 定义工具包
+		Dimension screenSize = kit.getScreenSize(); // 获取屏幕的尺寸
+		setBounds(screenSize.width / 2 - 512, screenSize.height / 2 - 360, 1024, 720);
+		setTitle("相册管理器");
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("New menu");
-		menuBar.add(mnNewMenu);
+		ImageIcon image = new ImageIcon("./images/not_logged_in.jpg");
+		Image img=image.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);//第三个值可以去查api是图片转化的方式
+        ImageIcon icon=new ImageIcon(img);
+		JMenu jmLogin = new JMenu("未登录");
+		jmLogin.setIcon(icon);
+		menuBar.add(jmLogin);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem);
+		jmLogin.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem_1);
+		jmLogin.add(mntmNewMenuItem_1);
 		
 		JMenu mnNewMenu_1 = new JMenu("New menu");
 		menuBar.add(mnNewMenu_1);
@@ -77,24 +86,11 @@ public class Start extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("New tab", null, panel, null);
-		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_1, null);
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_2, null);
-		
-		JPanel panel_4 = new JPanel();
-		contentPane.add(panel_4, BorderLayout.WEST);
-		panel_4.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		panel_4.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		panel_4.add(lblNewLabel_1);
 	}
 
 }

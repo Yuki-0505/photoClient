@@ -3,8 +3,11 @@ package service;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-
-public class SaveImage extends Tools {
+/*
+ * 上传图片及信息
+ * 返回状态
+ */
+public class SaveImage extends PassData {
 
 	public SaveImage() {
 		super();

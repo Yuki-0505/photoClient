@@ -1,6 +1,9 @@
 package service;
-
-public class DeleteImage extends Tools {
+/*
+ * 按组编号和时间戳删除图片
+ * 返回状态
+ */
+public class DeleteImage extends PassData {
 
 	public DeleteImage() {
 		super();

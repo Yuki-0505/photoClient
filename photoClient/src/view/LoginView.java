@@ -48,10 +48,9 @@ public class LoginView extends JFrame {
 	public LoginView() {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
 		Toolkit kit = Toolkit.getDefaultToolkit(); // 定义工具包
 		Dimension screenSize = kit.getScreenSize(); // 获取屏幕的尺寸
-		setLocation(screenSize.width / 2 - 160, screenSize.height / 2 - 95);
+		setBounds(screenSize.width / 2 - 160, screenSize.height / 2 - 95, 450, 300);
 		setSize(320, 170);
 		setResizable(false);
 		setLayout(null);
@@ -158,6 +157,9 @@ public class LoginView extends JFrame {
 			properties.setProperty("password", json.getString("password"));
 			if (json.containsKey("signature"))
 				properties.setProperty("signature", json.getString("signature"));
+			else 
+				properties.setProperty("signature", null);
+				
 			if (json.containsKey("avatar")) {
 				String[] avaname = json.getString("avaname").split("\\.");
 				String imgPath = "./images/" + "user." + avaname[1];
@@ -165,7 +167,9 @@ public class LoginView extends JFrame {
 				fos.write(json.getBytes("avatar"));
 				fos.close();
 				properties.setProperty("imgPath", imgPath);
-			}
+			} else 
+				properties.setProperty("imgPath", null);
+				
 			properties.store(bos, null);
 			bis.close();
 			bos.close();
