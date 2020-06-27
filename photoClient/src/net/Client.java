@@ -11,6 +11,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import utils.ErrorLog;
+
 public class Client {
 
 	private Socket socket;
@@ -22,13 +24,9 @@ public class Client {
 			this.socket = new Socket("localhost", 8000);
 			this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			this.out = new PrintStream(socket.getOutputStream());
-		} catch (UnknownHostException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		} catch (Exception e) {
+			ErrorLog.errorLog(e);
+		} 
 	}
 
 // 发送json数据
@@ -41,8 +39,7 @@ public class Client {
 		try {
 			return JSONArray.parseArray(in.readLine());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ErrorLog.errorLog(e);
 		}
 		return null;
 	}
@@ -54,8 +51,7 @@ public class Client {
 			in.close();
 			out.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ErrorLog.errorLog(e);
 		}
 	}
 
