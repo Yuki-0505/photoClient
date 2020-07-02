@@ -23,14 +23,14 @@ public class SaveImage extends PassData {
 	}
 
 	public static void main(String[] args) throws IOException {
-		FileInputStream fis = new FileInputStream("./images/yui.jpg");
+		FileInputStream fis = new FileInputStream("./images/user.jpg");
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		int b;
 		while((b = fis.read()) != -1) {
 			baos.write(b);
 		}
 		byte[] image = baos.toByteArray();
-		System.out.println(new SaveImage().work("a17dbbc0bb2641e19754e41ed3a63d68", 1, "yui.jpg", image));
+		System.out.println(new SaveImage().work("0e878240e0ec488a93333b918f1a0398", 1, "user.jpg", image));
 		fis.close();
 	}
 

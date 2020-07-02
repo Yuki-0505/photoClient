@@ -8,7 +8,7 @@ import java.io.StringWriter;
 
 public class ErrorLog {
 	
-	public static void errorLog(Exception e) {
+	public static void log(Exception e) {
 		StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         e.printStackTrace(pw);
@@ -20,10 +20,6 @@ public class ErrorLog {
 		}
         ps.println(sw.toString());
         ps.close();
-	}
-
-	public static void main(String[] args) {
-		
 	}
 
 }

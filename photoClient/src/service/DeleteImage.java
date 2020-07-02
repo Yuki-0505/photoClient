@@ -18,7 +18,7 @@ public class DeleteImage extends PassData {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(new DeleteImage().work("a17dbbc0bb2641e19754e41ed3a63d68", 1, 1593132983112L));
+		System.out.println(new DeleteImage().work("0c0352b1559d4b9db79f5c04e69f5901", 2, 15983310300826L));
 	}
 
 }

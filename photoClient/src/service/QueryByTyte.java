@@ -17,22 +17,18 @@ public class QueryByTyte extends PassData {
 		super();
 	}
 
-	public JSONArray work(String uid, int gid) {
+	public JSONArray work(String uid, int gid, int offset) {
 		json.put("uid", uid);
 		json.put("gid", gid);
+		json.put("offset", offset);
 		jsonArrIO();
 		return jsonArr;
 	}
+	
 
 	public static void main(String[] args) throws IOException {
-		JSONArray jsonArr =  new QueryByTyte().work("a17dbbc0bb2641e19754e41ed3a63d68", 1);
-		for (int i = 0; i < jsonArr.size(); i++) {
-			JSONObject json = jsonArr.getJSONObject(i);
-			FileOutputStream fos = new FileOutputStream(new File("./images",json.getString("timestamp")+json.getString("name")));
-			fos.write(json.getBytes("image"));
-			fos.close();
-		}
-		
+		new QueryByTyte().work("0e878240e0ec488a93333b918f1a0398", 1, 0);
 	}
 
 }
+

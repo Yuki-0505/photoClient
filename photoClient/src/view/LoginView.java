@@ -7,30 +7,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Properties;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import com.alibaba.fastjson.JSONObject;
 
+import net.Client;
 import service.Login;
+import utils.ErrorLog;
+import utils.PropertiesRead;
+import utils.PropertiesWrite;
 
 public class LoginView extends JFrame {
 
@@ -46,12 +40,10 @@ public class LoginView extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginView() {
-		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		Toolkit kit = Toolkit.getDefaultToolkit(); // 定义工具包
 		Dimension screenSize = kit.getScreenSize(); // 获取屏幕的尺寸
-		setBounds(screenSize.width / 2 - 160, screenSize.height / 2 - 95, 450, 300);
-		setSize(320, 170);
+		setBounds(screenSize.width / 2 - 160, screenSize.height / 2 - 95, 320, 170);
 		setResizable(false);
 		setLayout(null);
 		setTitle("---登录---");
@@ -78,7 +70,7 @@ public class LoginView extends JFrame {
 
 		readUser();
 		listen();
-		
+
 		setVisible(true);
 	}
 
@@ -97,9 +89,13 @@ public class LoginView extends JFrame {
 		});
 		txtPassword.addKeyListener(new KeyListener() {
 			@Override
-			public void keyTyped(KeyEvent e) {}
+			public void keyTyped(KeyEvent e) {
+			}
+
 			@Override
-			public void keyReleased(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
+			}
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -116,6 +112,10 @@ public class LoginView extends JFrame {
 			JOptionPane.showMessageDialog(null, "用户名或密码不能为空！", "提示信息", JOptionPane.PLAIN_MESSAGE);
 			return;
 		}
+		if (Client.netCheck() == false) {
+			JOptionPane.showMessageDialog(null, "网络异常！", "提示信息", JOptionPane.PLAIN_MESSAGE);
+			return;
+		}
 		JSONObject json = new Login().work(name, password);
 		if (json == null) {
 			JOptionPane.showMessageDialog(null, "用户名或密码不正确！", "提示信息", JOptionPane.PLAIN_MESSAGE);
@@ -128,56 +128,36 @@ public class LoginView extends JFrame {
 
 //	从配置文件读取用户信息并显示到登录界面
 	public void readUser() {
-		try {
-			Properties properties = new Properties();
-			BufferedInputStream bis;
-			bis = new BufferedInputStream(new FileInputStream("config.properties"));
-			properties.load(bis);
-			txtUser.setText(properties.getProperty("name"));
-			txtPassword.setText(properties.getProperty("password"));
-			bis.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		PropertiesRead pr = new PropertiesRead();
+		txtUser.setText(pr.getProperty("name"));
+		txtPassword.setText(pr.getProperty("password"));
+		pr.close();
 	}
 
 //	用户信息保存至配置文件
 	public void writeUser(JSONObject json) {
+		PropertiesWrite proio = new PropertiesWrite();
+		proio.setProperty("uid", json.getString("uid"));
+		proio.setProperty("name", json.getString("name"));
+		proio.setProperty("password", json.getString("password"));
+
+		if (json.containsKey("signature"))
+			proio.setProperty("signature", json.getString("signature"));
+		else
+			proio.remove("signature");
 		try {
-			Properties properties = new Properties();
-			BufferedInputStream bis = new BufferedInputStream(new FileInputStream("config.properties"));
-			properties.load(bis);
-			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("config.properties"));
-			properties.setProperty("uid", json.getString("uid"));
-			properties.setProperty("name", json.getString("name"));
-			properties.setProperty("password", json.getString("password"));
-			if (json.containsKey("signature"))
-				properties.setProperty("signature", json.getString("signature"));
-			else 
-				properties.setProperty("signature", null);
-				
 			if (json.containsKey("avatar")) {
 				String[] avaname = json.getString("avaname").split("\\.");
 				String imgPath = "./images/" + "user." + avaname[1];
 				FileOutputStream fos = new FileOutputStream(imgPath);
 				fos.write(json.getBytes("avatar"));
 				fos.close();
-				properties.setProperty("imgPath", imgPath);
-			} else 
-				properties.setProperty("imgPath", null);
-				
-			properties.store(bos, null);
-			bis.close();
-			bos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				proio.setProperty("imgPath", imgPath);
+			} else
+				proio.remove("imgPath");
+			proio.close();
+		} catch (Exception e) {
+			ErrorLog.log(e);
 		}
 	}
 

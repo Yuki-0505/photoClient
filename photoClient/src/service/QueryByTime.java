@@ -24,7 +24,7 @@ public class QueryByTime extends PassData {
 	}
 
 	public static void main(String[] args) throws IOException {
-		JSONArray jsonArr =  new QueryByTime().work("a17dbbc0bb2641e19754e41ed3a63d68", 1593134915591L);
+		JSONArray jsonArr =  new QueryByTime().work("0c0352b1559d4b9db79f5c04e69f5901", 15983310300826L);
 		for (int i = 0; i < jsonArr.size(); i++) {
 			JSONObject json = jsonArr.getJSONObject(i);
 			FileOutputStream fos = new FileOutputStream(new File("./images",json.getString("timestamp")+"_"+json.getString("name")));

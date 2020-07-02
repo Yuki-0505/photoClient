@@ -29,7 +29,7 @@ public class UpdateAvatar extends PassData {
 			baos.write(b);
 		}
 		byte[] image = baos.toByteArray();
-		System.out.println(new UpdateAvatar().work("a17dbbc0bb2641e19754e41ed3a63d68", "yui.jpg", image));
+		System.out.println(new UpdateAvatar().work("0e878240e0ec488a93333b918f1a0398", "yui.jpg", image));
 		fis.close();
 	}
 

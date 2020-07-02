@@ -1,27 +1,22 @@
 package view;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
+import net.Client;
 import service.Register;
+import utils.PropertiesWrite;
 
 public class RegisterView extends JFrame {
 
@@ -34,13 +29,10 @@ public class RegisterView extends JFrame {
 	private JPasswordField txtRepeatPw;
 	private JButton btnOk;
 	private JButton btnClear;
-
 	/**
 	 * Create the frame.
 	 */
-	public RegisterView() throws IOException {
-		setIconImage(new ImageIcon("./images/user.png").getImage());
-		
+	public RegisterView() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		Toolkit kit = Toolkit.getDefaultToolkit(); // 定义工具包
 		Dimension screenSize = kit.getScreenSize(); // 获取屏幕的尺寸
@@ -123,12 +115,17 @@ public class RegisterView extends JFrame {
 			JOptionPane.showMessageDialog(null, "两次输入的密码不相同！", "提示信息", JOptionPane.PLAIN_MESSAGE);
 			return;
 		}
+		if(Client.netCheck() == false) {
+			JOptionPane.showMessageDialog(null, "网络异常！", "提示信息", JOptionPane.PLAIN_MESSAGE);
+			return;
+		}
 		int status = new Register().work(name, password);
 		if (status == 0) {
 			JOptionPane.showMessageDialog(null, "用户名已存在！", "提示信息", JOptionPane.PLAIN_MESSAGE);
 			return;
 		}
 		JOptionPane.showMessageDialog(null, "注册成功！", "提示信息", JOptionPane.PLAIN_MESSAGE);
+		clearUserProperties();
 		new LoginView();
 		dispose();
 	}
@@ -136,26 +133,32 @@ public class RegisterView extends JFrame {
 	public boolean check(String password) {
 		return password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]{8,18}$");
 	}
+	
+	public void clearUserProperties() {
+		PropertiesWrite pw = new PropertiesWrite();
+		pw.clear();
+		pw.close();
+	}
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new RegisterView();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+//		try {
+//			UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+//		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+//				| UnsupportedLookAndFeelException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					new RegisterView();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
 	}
 }

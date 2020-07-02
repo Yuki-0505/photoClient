@@ -18,7 +18,7 @@ public class DeleteGroup extends PassData {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(new DeleteGroup().work("a17dbbc0bb2641e19754e41ed3a63d68", 3, 0));
+		System.out.println(new DeleteGroup().work("0c0352b1559d4b9db79f5c04e69f5901", 2, 0));
 	}
 
 }
