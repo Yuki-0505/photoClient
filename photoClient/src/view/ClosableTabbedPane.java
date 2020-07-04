@@ -1,16 +1,16 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import java.awt.Rectangle;
-import java.awt.Color;
-import java.awt.event.MouseListener;
-import java.util.HashMap;
-import java.awt.Component;
-import javax.swing.Icon;
-import java.awt.event.MouseEvent;
-import java.awt.Graphics;
 
 /**
  * 自定义带关闭按钮的TabbedPane

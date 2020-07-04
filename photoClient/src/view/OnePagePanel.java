@@ -4,8 +4,6 @@ import javax.swing.JPanel;
 
 import com.alibaba.fastjson.JSONArray;
 
-import service.QueryByTyte;
-
 public class OnePagePanel extends JPanel {
 
 	public OnePagePanel(JSONArray jsonArr) {

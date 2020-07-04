@@ -3,52 +3,20 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileFilter;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-
-import net.Client;
-import service.DeleteImage;
-import service.QueryAllGroup;
-import service.QueryByTyte;
-import service.SaveImage;
-import service.UpdateImageGroup;
 import utils.ErrorLog;
-import utils.ImageFileToBytes;
-import utils.MyImageFilter;
 import utils.PropertiesRead;
-import utils.PropertiesWrite;
 
 public class Start extends JFrame {
 
@@ -61,7 +29,7 @@ public class Start extends JFrame {
 	private ClosableTabbedPane tabFavorites;
 	
 	public Start() {
-//		读取配置文件中的窗体风格并设置
+//		读取配置文件中的窗体风格及图标并设置
 		setStyle();
 //		设置主窗体JFrmae的属性
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,6 +73,8 @@ public class Start extends JFrame {
 				| UnsupportedLookAndFeelException e) {
 			ErrorLog.log(e);
 		}
+		ImageIcon imageIcon=new ImageIcon("./images/photos.png");
+		setIconImage(imageIcon.getImage());  
 	}
 	
 	public static void main(String[] args) {

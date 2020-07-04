@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 
 import net.Client;
 import service.Register;
-import utils.PropertiesWrite;
 
 public class RegisterView extends JFrame {
 

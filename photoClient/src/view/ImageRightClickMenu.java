@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -21,10 +20,6 @@ import service.UpdateImageGroup;
 public class ImageRightClickMenu extends JPopupMenu {
 
 	private JButton btnImage;
-	private JMenuItem jmiDel;
-	private JMenuItem jmiDownload;
-	private JMenuItem jmiMove;
-	private JSONObject json;
 	private String uid;
 	private int gid;
 	private long timestamp;
@@ -33,7 +28,6 @@ public class ImageRightClickMenu extends JPopupMenu {
 
 	public ImageRightClickMenu(JButton btnImage, JSONObject json) {
 		this.btnImage = btnImage;
-		this.json = json;
 //		获取图片属性
 		this.uid = json.getString("uid");
 		this.gid = json.getIntValue("gid");

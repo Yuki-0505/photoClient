@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.io.FileOutputStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,9 +22,8 @@ import com.alibaba.fastjson.JSONObject;
 
 import net.Client;
 import service.Login;
-import utils.ImageBytesToFile;
-import utils.ErrorLog;
 import utils.GetFileSuffix;
+import utils.ImageBytesToFile;
 import utils.PropertiesRead;
 import utils.PropertiesWrite;
 
