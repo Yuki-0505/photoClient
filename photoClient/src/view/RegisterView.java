@@ -33,7 +33,7 @@ public class RegisterView extends JFrame {
 	 * Create the frame.
 	 */
 	public RegisterView() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		Toolkit kit = Toolkit.getDefaultToolkit(); // 定义工具包
 		Dimension screenSize = kit.getScreenSize(); // 获取屏幕的尺寸
 		setBounds(screenSize.width / 2 - 160, screenSize.height / 2 - 115, 450, 300);
@@ -125,20 +125,20 @@ public class RegisterView extends JFrame {
 			return;
 		}
 		JOptionPane.showMessageDialog(null, "注册成功！", "提示信息", JOptionPane.PLAIN_MESSAGE);
-		clearUserProperties();
-		new LoginView();
-		dispose();
+//		clearUserProperties();
+//		new LoginView();
+		setVisible(false);
 	}
 
 	public boolean check(String password) {
 		return password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]{8,18}$");
 	}
 	
-	public void clearUserProperties() {
-		PropertiesWrite pw = new PropertiesWrite();
-		pw.clear();
-		pw.close();
-	}
+//	public void clearUserProperties() {
+//		PropertiesWrite pw = new PropertiesWrite();
+//		pw.clear();
+//		pw.close();
+//	}
 
 	/**
 	 * Launch the application.

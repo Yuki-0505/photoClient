@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -13,10 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 import net.Client;
 import service.CreateGroup;
@@ -34,7 +30,7 @@ public class CreateGroupView extends JFrame {
 	 * Create the frame.
 	 */
 	public CreateGroupView() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		Toolkit kit = Toolkit.getDefaultToolkit(); // 定义工具包
 		Dimension screenSize = kit.getScreenSize(); // 获取屏幕的尺寸
 		setBounds(screenSize.width / 2 - 160, screenSize.height / 2 - 65, 320, 130);
@@ -107,7 +103,7 @@ public class CreateGroupView extends JFrame {
 		pr.close();
 		if(status == 1) {
 			JOptionPane.showMessageDialog(null, "收藏夹创建成功！", "提示信息", JOptionPane.PLAIN_MESSAGE);
-			dispose();
+			setVisible(false);
 		} else {
 			JOptionPane.showMessageDialog(null, "该名称已存在！", "提示信息", JOptionPane.PLAIN_MESSAGE);
 		}

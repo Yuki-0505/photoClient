@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class ShowOneImageView extends JFrame {
+public class OneImageView extends JFrame {
 
 	private ImageIcon image;
 	private ImageIcon icon;
@@ -25,7 +25,7 @@ public class ShowOneImageView extends JFrame {
 	private int y;
 	private double factor;
 
-	public ShowOneImageView(ImageIcon image) {
+	public OneImageView(ImageIcon image) {
 		this.image = image;
 		factor = 1.0;
 
@@ -40,16 +40,15 @@ public class ShowOneImageView extends JFrame {
 			showHeight = 1440 * height / width;
 			showWidth = 1440;
 		}
-		if (showHeight >= 810) {
-			showWidth = 810 * showWidth / showHeight;
-			showHeight = 810;
-		}
 		width = showWidth;
 		height = showHeight;
+		if (showHeight >= 810) {
+			showHeight = 810;
+		}
 		setBounds(screenSize.width / 2 - showWidth / 2, screenSize.height / 2 - showHeight / 2, showWidth + 10,
 				showHeight + 40);
 
-		showImage(showWidth, showHeight);
+		showImage(width, height);
 
 		listen();
 		setVisible(true);

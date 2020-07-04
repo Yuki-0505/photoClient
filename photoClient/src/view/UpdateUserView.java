@@ -22,7 +22,9 @@ import net.Client;
 import service.UpdateAvatar;
 import service.UpdateSignature;
 import service.UpdateUserInfo;
+import utils.ImageBytesToFile;
 import utils.ErrorLog;
+import utils.GetFileSuffix;
 import utils.ImageFileToBytes;
 import utils.MyImageFilter;
 import utils.PropertiesRead;
@@ -47,7 +49,7 @@ public class UpdateUserView extends JFrame {
 	 * Create the frame.
 	 */
 	public UpdateUserView() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		Toolkit kit = Toolkit.getDefaultToolkit(); // 定义工具包
 		Dimension screenSize = kit.getScreenSize(); // 获取屏幕的尺寸
 		setBounds(screenSize.width / 2 - 160, screenSize.height / 2 - 175, 360, 300);
@@ -55,10 +57,10 @@ public class UpdateUserView extends JFrame {
 		setLayout(null);
 		setTitle("---修改信息---");
 
-		lblUser = new JLabel("用 户 名:");
-		lblPassword = new JLabel("密      码:");
+		lblUser = new JLabel("用户名:");
+		lblPassword = new JLabel("密码:");
 		lblSignature = new JLabel("个性签名:");
-		lblAvatar = new JLabel("头   像:");
+		lblAvatar = new JLabel("头像:");
 		txtUser = new JTextField(20);
 		txtPassword = new JPasswordField(20);
 		txtSignature = new JTextField(255);
@@ -136,7 +138,7 @@ public class UpdateUserView extends JFrame {
 		String name = txtUser.getText();
 		String password = new String(txtPassword.getPassword());
 		String signature = txtSignature.getText();
-		String avatarPath = txtAvatar.getText();
+		String imagePath = txtAvatar.getText();
 		if (Client.netCheck() == false) {
 			JOptionPane.showMessageDialog(null, "网络异常！", "提示信息", JOptionPane.PLAIN_MESSAGE);
 			return;
@@ -148,6 +150,7 @@ public class UpdateUserView extends JFrame {
 		if("".equals(password)) password = pr.getProperty("password");
 		int status = new UpdateUserInfo().work(uid, name, password);
 		pr.close();
+		PropertiesWrite pw = new PropertiesWrite();
 		if (status == 0) {
 			JOptionPane.showMessageDialog(null, "用户名已存在！", "提示信息", JOptionPane.PLAIN_MESSAGE);
 			return;
@@ -155,17 +158,19 @@ public class UpdateUserView extends JFrame {
 		writeUser(name, password);
 		if(!"".equals(signature)) {
 			status = new UpdateSignature().work(uid, signature);
+			pw.put("signature", signature);
 		}
-		if(!"".equals(avatarPath)) {
-			File file = new File(avatarPath);
+		if(!"".equals(imagePath)) {
+			File file = new File(imagePath);
 			byte[] image = ImageFileToBytes.getBytes(file);
 			status = new UpdateAvatar().work(uid, file.getName(), image);
-			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("./images/user.properties"));
-			bos.write(image);
-			bos.close();
+			String avatarPath = "./images/" + "user." + GetFileSuffix.get(file.getName());
+			ImageBytesToFile.save(new File(avatarPath), image);
+			pw.setProperty("avatarPath", avatarPath);
 		}
+		pw.close();
 		JOptionPane.showMessageDialog(null, "修改成功！", "提示信息", JOptionPane.PLAIN_MESSAGE);
-		dispose();
+		setVisible(false);
 	}
 
 //	用户信息保存至配置文件

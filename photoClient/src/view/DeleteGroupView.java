@@ -30,7 +30,7 @@ public class DeleteGroupView extends JFrame {
 		setLayout(null);
 		setResizable(false);
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		jrbYes = new JRadioButton("同时删除该收藏夹下所有图片(不勾选则转移到默认收藏夹下)");
 		jrbYes.setSelected(true);
@@ -51,10 +51,10 @@ public class DeleteGroupView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int flag = jrbYes.isSelected() ? 1 : 0;
 				new DeleteGroup().work(uid, gid, flag);
-				dispose();
 				JOptionPane.showMessageDialog(null, "删除成功！", "提示信息", JOptionPane.PLAIN_MESSAGE);
+				setVisible(false);
 			}
 		});
 	}
-
+	
 }

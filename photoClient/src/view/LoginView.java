@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.FileOutputStream;
 
 import javax.swing.JButton;
@@ -22,7 +23,9 @@ import com.alibaba.fastjson.JSONObject;
 
 import net.Client;
 import service.Login;
+import utils.ImageBytesToFile;
 import utils.ErrorLog;
+import utils.GetFileSuffix;
 import utils.PropertiesRead;
 import utils.PropertiesWrite;
 
@@ -40,7 +43,7 @@ public class LoginView extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginView() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		Toolkit kit = Toolkit.getDefaultToolkit(); // 定义工具包
 		Dimension screenSize = kit.getScreenSize(); // 获取屏幕的尺寸
 		setBounds(screenSize.width / 2 - 160, screenSize.height / 2 - 95, 320, 170);
@@ -123,7 +126,7 @@ public class LoginView extends JFrame {
 		}
 		writeUser(json);
 		JOptionPane.showMessageDialog(null, "登录成功！", "提示信息", JOptionPane.PLAIN_MESSAGE);
-		dispose();
+		setVisible(false);
 	}
 
 //	从配置文件读取用户信息并显示到登录界面
@@ -136,29 +139,22 @@ public class LoginView extends JFrame {
 
 //	用户信息保存至配置文件
 	public void writeUser(JSONObject json) {
-		PropertiesWrite proio = new PropertiesWrite();
-		proio.setProperty("uid", json.getString("uid"));
-		proio.setProperty("name", json.getString("name"));
-		proio.setProperty("password", json.getString("password"));
+		PropertiesWrite pw = new PropertiesWrite();
+		pw.setProperty("uid", json.getString("uid"));
+		pw.setProperty("name", json.getString("name"));
+		pw.setProperty("password", json.getString("password"));
 
 		if (json.containsKey("signature"))
-			proio.setProperty("signature", json.getString("signature"));
+			pw.setProperty("signature", json.getString("signature"));
 		else
-			proio.remove("signature");
-		try {
-			if (json.containsKey("avatar")) {
-				String[] avaname = json.getString("avaname").split("\\.");
-				String imgPath = "./images/" + "user." + avaname[1];
-				FileOutputStream fos = new FileOutputStream(imgPath);
-				fos.write(json.getBytes("avatar"));
-				fos.close();
-				proio.setProperty("imgPath", imgPath);
-			} else
-				proio.remove("imgPath");
-			proio.close();
-		} catch (Exception e) {
-			ErrorLog.log(e);
-		}
+			pw.remove("signature");
+		if (json.containsKey("avatar")) {
+			String avatarPath = "./images/" + "user." + GetFileSuffix.get(json.getString("avaname"));
+			ImageBytesToFile.save(new File(avatarPath), json.getBytes("avatar"));
+			pw.setProperty("avatarPath", avatarPath);
+		} else
+			pw.remove("avatarPath");
+		pw.close();
 	}
 
 	/**
