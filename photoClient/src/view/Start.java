@@ -74,7 +74,7 @@ public class Start extends JFrame {
 			ErrorLog.log(e);
 		}
 		ImageIcon imageIcon=new ImageIcon("./images/photos.png");
-		setIconImage(imageIcon.getImage());  
+		setIconImage(imageIcon.getImage());
 	}
 	
 	public static void main(String[] args) {

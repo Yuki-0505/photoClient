@@ -37,6 +37,8 @@ public class HomepageView extends JFrame {
 		setResizable(false);
 		setLayout(null);
 		setTitle("---个人主页---");
+		ImageIcon imageIcon=new ImageIcon("./images/photos.png");
+		setIconImage(imageIcon.getImage());
 		
 		PropertiesRead pr = new PropertiesRead();
 		String uid = pr.getProperty("uid");

@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -48,6 +49,8 @@ public class LoginView extends JFrame {
 		setResizable(false);
 		setLayout(null);
 		setTitle("---登录---");
+		ImageIcon imageIcon=new ImageIcon("./images/photos.png");
+		setIconImage(imageIcon.getImage());
 
 		lblUser = new JLabel("User:");
 		lblPassword = new JLabel("Password:");

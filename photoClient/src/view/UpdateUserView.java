@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -53,6 +54,8 @@ public class UpdateUserView extends JFrame {
 		setResizable(false);
 		setLayout(null);
 		setTitle("---修改信息---");
+		ImageIcon imageIcon=new ImageIcon("./images/photos.png");
+		setIconImage(imageIcon.getImage());
 
 		lblUser = new JLabel("用户名:");
 		lblPassword = new JLabel("密码:");

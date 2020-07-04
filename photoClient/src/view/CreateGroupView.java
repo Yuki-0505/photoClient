@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,6 +38,8 @@ public class CreateGroupView extends JFrame {
 		setResizable(false);
 		setLayout(null);
 		setTitle("---新建收藏夹---");
+		ImageIcon imageIcon=new ImageIcon("./images/photos.png");
+		setIconImage(imageIcon.getImage());
 
 		lblName = new JLabel("Name:");
 		txtName = new JTextField(20);

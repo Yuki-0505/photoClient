@@ -32,6 +32,8 @@ public class OneImageView extends JFrame {
 		setLayout(null);
 		Toolkit kit = Toolkit.getDefaultToolkit(); // 定义工具包
 		Dimension screenSize = kit.getScreenSize(); // 获取屏幕的尺寸
+		ImageIcon imageIcon=new ImageIcon("./images/photos.png");
+		setIconImage(imageIcon.getImage());
 		width = image.getIconWidth();
 		height = image.getIconHeight();
 		int showWidth = width, showHeight = height;

@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,6 +23,8 @@ public class ProgressBarView extends JFrame implements Runnable {
 	private int value = 0;
 
 	public ProgressBarView() {
+		ImageIcon imageIcon=new ImageIcon("./images/photos.png");
+		setIconImage(imageIcon.getImage());
 		this.progressBar = new JProgressBar();
 		this.btn = new JButton("确定");
         Container container=getContentPane();

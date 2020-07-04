@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -31,6 +32,8 @@ public class DeleteGroupView extends JFrame {
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		ImageIcon imageIcon=new ImageIcon("./images/photos.png");
+		setIconImage(imageIcon.getImage());
 		
 		jrbYes = new JRadioButton("同时删除该收藏夹下所有图片(不勾选则转移到默认收藏夹下)");
 		jrbYes.setSelected(true);
