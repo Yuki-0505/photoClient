@@ -3,14 +3,12 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 
 import com.alibaba.fastjson.JSONArray;
 
@@ -19,26 +17,24 @@ import service.QueryAllGroup;
 import utils.PropertiesRead;
 
 public class FavoritesMenu extends JMenu {
+	private static final long serialVersionUID = 1L;
 	private JMenuItem jmCreate;
 	private JMenuItem jmOpen;
 	private JMenuItem jmDelete;
-	private JTabbedPane tabFavorites;
-	private HashMap<Integer, JPanel> openFavoritesMap;
+	private ClosableTabbedPane tabFavorites;
 
-	public FavoritesMenu(JTabbedPane tabFavorites) {
+	public FavoritesMenu(ClosableTabbedPane tabFavorites) {
 		this.tabFavorites = tabFavorites;
-		this.openFavoritesMap = new HashMap<Integer, JPanel>();
 		setFirstLevelMenu();
-		
+
 		PropertiesRead pr = new PropertiesRead();
-		if(pr.containsKey("uid") == false) {
+		if (pr.containsKey("uid") == false) {
 			pr.close();
 			return;
 		}
 		pr.close();
 		JPanel jpanel = new OneFavoritesPanel(1);
-		tabFavorites.addTab("默认",jpanel);
-		openFavoritesMap.put(1, jpanel);
+		tabFavorites.addTab("默认", jpanel, null);
 	}
 
 	public void setFirstLevelMenu() {
@@ -78,7 +74,7 @@ public class FavoritesMenu extends JMenu {
 
 	public void setSecondLevelMenu() {
 //		检查网络和用户状态并获取uid
-		if (Client.netCheck() == false) 
+		if (Client.netCheck() == false)
 			return;
 		PropertiesRead pr = new PropertiesRead();
 		if (pr.containsKey("uid") == false)
@@ -100,12 +96,8 @@ public class FavoritesMenu extends JMenu {
 			jmiOpen.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if (openFavoritesMap.containsKey(gid)) {
-						return;
-					}
 					JPanel jpanel = new OneFavoritesPanel(gid);
-					tabFavorites.addTab(gname, jpanel);
-					openFavoritesMap.put(gid, jpanel);
+					tabFavorites.addTab(gname, jpanel, null);
 					updateMenu();
 				}
 			});
@@ -116,20 +108,7 @@ public class FavoritesMenu extends JMenu {
 						JOptionPane.showMessageDialog(null, "默认收藏夹不可被删除哦QWQ！", "提示信息", JOptionPane.PLAIN_MESSAGE);
 						return;
 					}
-					JFrame f = new DeleteGroupView(uid, gid);
-					new Thread() {
-						public void run() {
-							while (f.isVisible()) {
-								System.out.print("");
-							}
-							f.dispose();
-							if(openFavoritesMap.containsKey(gid)) {
-								tabFavorites.remove(openFavoritesMap.get(gid));
-								openFavoritesMap.remove(gid);
-							}
-							updateMenu();
-						}
-					}.start();
+					new DeleteGroupView(uid, gid);
 				}
 			});
 		}

@@ -141,12 +141,12 @@ public class OneFavoritesPanel extends JPanel {
 			public void run() {
 				update(getGraphics());
 				count++;
-				if (count >= 12) {
+				if (count >= 4) {
 					timer.cancel();
 				}
 			}
 		};
-		timer.scheduleAtFixedRate(task, 0, 500);
+		timer.scheduleAtFixedRate(task, 0, 1000);
 	}
 
 	public boolean setUid() {

@@ -58,7 +58,7 @@ public class Start extends JFrame {
 	private JMenu jmUser;
 	private JMenu jmFavorites;
 	private JMenu jmStyle;
-	private JTabbedPane tabFavorites;
+	private ClosableTabbedPane tabFavorites;
 	
 	public Start() {
 //		读取配置文件中的窗体风格并设置
@@ -80,7 +80,7 @@ public class Start extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 //		设置选项卡面板
-		tabFavorites = new JTabbedPane(JTabbedPane.TOP);
+		tabFavorites = new ClosableTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabFavorites, BorderLayout.CENTER);
 //		用户操作菜单
 		jmUser = new UserMenu();
@@ -106,4 +106,17 @@ public class Start extends JFrame {
 			ErrorLog.log(e);
 		}
 	}
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					new Start();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 }
